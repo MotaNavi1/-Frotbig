@@ -1,8 +1,8 @@
 from telegram import Update, Bot
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 
-TOKEN = "ТВОЙ_ТОКЕН"  # ← Вставь сюда свой токен
-TARGET_USER_ID = 123456789  # ← Замени на свой Telegram ID
+TOKEN = "7058988325:AAGlcTEeHHThACMwT-I8RlVSZqIk687pyNI"
+TARGET_USER_ID = 1394753930
 
 bot = Bot(token=TOKEN)
 application = ApplicationBuilder().token(TOKEN).build()
@@ -27,7 +27,7 @@ async def forward_to_target(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 application.add_handler(MessageHandler(filters.ALL, forward_to_target))
 
-WEBHOOK_URL = "https://<твой-домен>.onrender.com/" + TOKEN  # ← вставь свой Render-домен здесь
+WEBHOOK_URL = "https://frotbig.onrender.com" + TOKEN
 
 application.run_webhook(
     listen="0.0.0.0",
