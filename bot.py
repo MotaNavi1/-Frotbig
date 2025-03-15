@@ -1,4 +1,3 @@
-from flask import Flask, request
 from telegram import Update, Bot
 from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 import asyncio
@@ -6,7 +5,6 @@ import asyncio
 TOKEN = '7058988325:AAGlcTEeHHThACMwT-I8RlVSZqIk687pyNI'
 TARGET_USER_ID = 1394753930
 
-app = Flask(__name__)
 bot = Bot(token=TOKEN)
 application = ApplicationBuilder().token(TOKEN).build()
 WEBHOOK_URL = "https://frotbig.onrender.com" + TOKEN
@@ -35,12 +33,6 @@ async def forward_to_target(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await message.reply_text("✅ Отправлено! Спасибо за мемчик 😉")
 
 application.add_handler(MessageHandler(filters.ALL, forward_to_target))
-
-@app.route(f'/{TOKEN}', methods=['POST'])
-def webhook():
-    update = Update.de_json(request.get_json(force=True), bot)
-    asyncio.run(application.process_update(update))
-    return 'ok'
 
 @app.route('/')
 def index():
