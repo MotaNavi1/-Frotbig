@@ -9,6 +9,12 @@ TARGET_USER_ID = 1394753930
 app = Flask(__name__)
 bot = Bot(token=TOKEN)
 application = ApplicationBuilder().token(TOKEN).build()
+WEBHOOK_URL = "https://frotbig.onrender.com" + TOKEN
+application.run_webhook(
+    listen="0.0.0.0",
+    port=10000,
+    webhook_url=WEBHOOK_URL
+)
 
 async def forward_to_target(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.message
