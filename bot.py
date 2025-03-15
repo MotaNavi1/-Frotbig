@@ -1,6 +1,6 @@
 from flask import Flask, request
 from telegram import Update, Bot
-from telegram.ext import ApplicationBuilder, ContextTypes, Dispatcher, MessageHandler, filters
+from telegram.ext import ApplicationBuilder, ContextTypes, MessageHandler, filters
 import asyncio
 
 TOKEN = '7058988325:AAGlcTEeHHThACMwT-I8RlVSZqIk687pyNI'
