@@ -9,7 +9,6 @@ TARGET_USER_ID = 1394753930
 app = Flask(__name__)
 bot = Bot(token=TOKEN)
 application = ApplicationBuilder().token(TOKEN).build()
-dispatcher: Dispatcher = application.dispatcher
 
 async def forward_to_target(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.message
@@ -29,12 +28,12 @@ async def forward_to_target(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await bot.send_message(chat_id=TARGET_USER_ID, text="Получен неизвестный тип сообщения.")
     await message.reply_text("✅ Отправлено! Спасибо за мемчик 😉")
 
-dispatcher.add_handler(MessageHandler(filters.ALL, forward_to_target))
+application.add_handler(MessageHandler(filters.ALL, forward_to_target))
 
 @app.route(f'/{TOKEN}', methods=['POST'])
 def webhook():
     update = Update.de_json(request.get_json(force=True), bot)
-    asyncio.run(dispatcher.process_update(update))
+    asyncio.run(application.process_update(update))
     return 'ok'
 
 @app.route('/')
